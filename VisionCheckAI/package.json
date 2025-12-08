@@ -47,7 +47,10 @@
       "@testing-library/jest-native/extend-expect"
     ],
     "collectCoverage": true,
-    "coverageDirectory": "coverage"
+    "coverageDirectory": "coverage",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@react-native|react-clone-referenced-element|@react-navigation/.*|react-redux/.*)"
+    ]
   },
   "private": true
 }
