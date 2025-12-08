@@ -2,4 +2,6 @@ node_modules
 .DS_Store
 .env
 ml/data/
+ml/models/
 VisionCheckAI/dist/
+VisionCheckAI/coverage/

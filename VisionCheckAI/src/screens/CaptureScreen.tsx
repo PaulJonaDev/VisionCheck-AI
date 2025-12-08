@@ -14,6 +14,7 @@ import { colors, spacing } from '../ui/theme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useWindowDimensions } from 'react-native';
 import { detectEyes } from '../services/eyeDetection';
+import { cropToEyesRegion } from '../services/cropping';
 
 export default function CaptureScreen() {
   const [permission, requestPermission] = useCameraPermissions();
@@ -38,6 +39,10 @@ export default function CaptureScreen() {
     try {
       eyeBoxes = await detectEyes(photo.uri);
     } catch {}
+    let croppedUri = photo.uri;
+    try {
+      croppedUri = await cropToEyesRegion(photo.uri, eyeBoxes ?? undefined);
+    } catch {}
     const preds: PatternPrediction[] = [
       { pattern: 'enrojecimiento', confidence: 0.4, severity: 'baja' },
       { pattern: 'opacidad', confidence: 0.2, severity: 'baja' },
@@ -46,7 +51,7 @@ export default function CaptureScreen() {
     dispatch(
       setLastCapture({
         id: Date.now().toString(),
-        imageUri: photo.uri,
+        imageUri: croppedUri,
         capturedAt: Date.now(),
         quality: { brightness: quality.brightness, blurScore: undefined, distanceHint: undefined, eyeBoxes: eyeBoxes ?? undefined },
         predictions: preds,
