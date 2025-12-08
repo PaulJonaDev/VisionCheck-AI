@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "VisionCheck AI",
+    "slug": "visioncheck-ai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+  "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.visioncheckai.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "La cámara se usa para capturar imágenes de tus ojos para tamizaje visual no diagnóstico."
+      }
+  },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.visioncheckai.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
