@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useDispatch } from 'react-redux';
 import { setLastCapture } from '../state/slices/analysisSlice';
-import { assessQuality } from '../services/quality';
+import { assessQualityForUri } from '../services/quality';
 import { PatternPrediction } from '../types';
 import { RootStackParamList } from '../navigation';
 import PrimaryButton from '../ui/components/PrimaryButton';
@@ -33,7 +33,7 @@ export default function CaptureScreen() {
     if (!camera) return;
     const photo = await camera.takePictureAsync({ skipProcessing: true, quality: 0.9 });
     setPhotoUri(photo.uri);
-    const quality = assessQuality();
+    const quality = await assessQualityForUri(photo.uri);
     let eyeBoxes = null;
     try {
       eyeBoxes = await detectEyes(photo.uri);
@@ -48,7 +48,7 @@ export default function CaptureScreen() {
         id: Date.now().toString(),
         imageUri: photo.uri,
         capturedAt: Date.now(),
-        quality: { brightness: undefined, blurScore: undefined, distanceHint: undefined, eyeBoxes: eyeBoxes ?? undefined },
+        quality: { brightness: quality.brightness, blurScore: undefined, distanceHint: undefined, eyeBoxes: eyeBoxes ?? undefined },
         predictions: preds,
       })
     );
