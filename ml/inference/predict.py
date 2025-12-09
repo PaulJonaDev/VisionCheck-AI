@@ -37,4 +37,5 @@ def predict(image_path, model_path="ml/models/mobilenet_v1/model.h5"):
 
 if __name__ == "__main__":
     img = sys.argv[1] if len(sys.argv) > 1 else ""
-    print(json.dumps(predict(img)))
+    mdl = sys.argv[2] if len(sys.argv) > 2 else os.environ.get('MODEL_PATH', "ml/models/mobilenet_v1/model.h5")
+    print(json.dumps(predict(img, mdl)))

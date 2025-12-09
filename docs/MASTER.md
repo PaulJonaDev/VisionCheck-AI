@@ -52,6 +52,13 @@ Tamizaje visual inteligente en móviles. Detecta patrones visibles y genera expl
 - Utils: `ml/utils/augment.py`, `ml/utils/visualize.py`
 - Requisitos: `ml/requirements.txt`
 
+## Contrato ML ↔ Backend
+- Servicio backend: `src/services/ml.service.js` ejecuta `python3 <ML_SCRIPT_PATH> <imageUri> <ML_MODEL_PATH>` y parsea JSON de salida.
+- Entrada: `imageUri` (string), `modelPath` opcional.
+- Salida: objeto con probabilidades por patrón y metadatos `{ image, model }`.
+- Errores: `ML_SCRIPT_NOT_FOUND`, `ML_PROCESS_ERROR`, `ML_TIMEOUT`, `ML_OUTPUT_PARSE_ERROR`.
+- Configuración (`env.js`): `ML_SCRIPT_PATH`, `ML_MODEL_PATH`, `ML_TIMEOUT_MS`.
+
 ## Infraestructura
 - Dockerfiles:
   - `infra/docker/backend.Dockerfile` (Node 18, `PORT=3001`)
