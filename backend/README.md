@@ -1,9 +1,17 @@
-API para sincronización opcional y panel profesional. Estructura inicial sin implementación.
+API para sincronización opcional y panel profesional.
 
 - `src/` código fuente
-- `tests/` pruebas
+- `__tests__/` pruebas
 - `.env` variables de entorno
 
+Comandos:
+```bash
+cd backend
+npm install
+npm start
+npm test
+```
+
 Próximos pasos:
-- Definir endpoints de autenticación y carga de capturas.
-- Añadir almacenamiento seguro y reglas de acceso.
+- Endpoints de autenticación y carga de capturas.
+- Almacenamiento seguro y reglas de acceso.

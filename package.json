@@ -1,0 +1,8 @@
+{
+  "name": "visioncheck-monorepo",
+  "private": true,
+  "workspaces": [
+    "VisionCheckAI",
+    "backend"
+  ]
+}
