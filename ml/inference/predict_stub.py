@@ -1,4 +1,4 @@
-def predict(image_path):
+def predict():
     return {
         'enrojecimiento': 0.3,
         'opacidad': 0.2,

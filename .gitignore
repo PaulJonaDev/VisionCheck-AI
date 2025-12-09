@@ -5,3 +5,5 @@ ml/data/
 ml/models/
 VisionCheckAI/dist/
 VisionCheckAI/coverage/
+data/
+frontend/dist/

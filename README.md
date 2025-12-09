@@ -47,9 +47,11 @@ npm run build:web
   - Crea el tag: `git tag -a vX.Y.Z -m "Notas" && git push --tags`.
 
 ## Estructura
-- `frontend/` aplicación (por ahora ubicada en `VisionCheckAI`).
+- `frontend/` UI (por ahora ubicada en `VisionCheckAI`).
 - `backend/` API Express (servidor básico `/health`, `/captures`).
 - `ml/` pipeline de datos y entrenamiento.
+- `data/` datasets (no versionados, ignorados por git).
+- `tests/` pruebas globales y de integración.
 - `VisionCheckAI/src/screens` pantallas.
 - `VisionCheckAI/src/ui` tema y componentes.
 - `VisionCheckAI/src/services` explicación, calidad e identificación de ojos.
@@ -75,6 +77,10 @@ npm test
 ## Backend
 - Arranque: `cd backend && npm install && npm start`
 - Salud: `GET http://localhost:4000/health`
+
+## Contenedores
+- `docker-compose up -d` para levantar el backend en Node 20.
+- El frontend Expo se recomienda ejecutarlo en host durante desarrollo.
 
 ## Datasets
 - Ver `/.trae/documents/datasets_vision_ocular.md`.

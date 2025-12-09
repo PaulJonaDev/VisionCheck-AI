@@ -1,0 +1,15 @@
+services:
+  backend:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    command: sh -c "npm install && npm start"
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+    restart: unless-stopped
+
+# Nota: el frontend (Expo) se ejecuta mejor fuera de contenedor en desarrollo.
+# Para servir web estático, primero exporta a VisionCheckAI/dist y usa un servidor estático (nginx) si lo deseas.

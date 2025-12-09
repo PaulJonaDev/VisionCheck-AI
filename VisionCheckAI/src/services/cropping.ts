@@ -22,7 +22,7 @@ export async function cropToEyesRegion(uri: string, eyeBoxes?: EyeBox[] | null):
   let w = Math.round(width * 0.6);
   let h = Math.round(height * 0.35);
 
-  if (eyeBoxes && eyeBoxes.length === 2) {
+  if (eyeBoxes?.length === 2) {
     const xs = [eyeBoxes[0].x, eyeBoxes[1].x];
     const ys = [eyeBoxes[0].y, eyeBoxes[1].y];
     const xMaxs = [eyeBoxes[0].x + eyeBoxes[0].w, eyeBoxes[1].x + eyeBoxes[1].w];
@@ -32,7 +32,7 @@ export async function cropToEyesRegion(uri: string, eyeBoxes?: EyeBox[] | null):
     const xMaxN = Math.max(xMaxs[0], xMaxs[1]);
     const yMaxN = Math.max(yMaxs[0], yMaxs[1]);
     const padYTop = 0.12; // cejas
-    const padYBottom = 0.10; // tabique
+    const padYBottom = 0.1; // tabique
     const padX = 0.08;
     x = Math.round(width * clamp(xMinN - padX, 0, 1));
     y = Math.round(height * clamp(yMinN - padYTop, 0, 1));
