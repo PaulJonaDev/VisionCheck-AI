@@ -1,0 +1,19 @@
+{
+  "model": "mobilenet_v1",
+  "image_size": 224,
+  "batch_size": 64,
+  "epochs": 20,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0,
+  "augmentations": {
+    "brightness": 0.1,
+    "contrast": 0.1,
+    "rotation": 10,
+    "flip_horizontal": true
+  },
+  "classes": ["enrojecimiento", "opacidad", "reflejo_irregular", "inflamacion", "fatiga"],
+  "outputs": ["severity", "confidence"],
+  "train_split": 0.7,
+  "val_split": 0.15,
+  "test_split": 0.15
+}
