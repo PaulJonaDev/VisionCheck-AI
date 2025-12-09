@@ -1,102 +1,83 @@
 # VisionCheck AI
 
-Consulta el documento maestro en `docs/MASTER.md` para una visión completa del producto, arquitectura, comandos y CI/CD.
-
 Tamizaje visual inteligente en dispositivos móviles. Detecta patrones y cambios oculares comunes sin realizar diagnósticos médicos.
 
-## Alcance
-- No diagnostica ni reemplaza profesionales. Detecta patrones: enrojecimiento, opacidad, reflejo irregular, posible inflamación y fatiga ocular.
+Consulta el documento maestro `docs/MASTER.md` y el overview `docs/OVERVIEW.md` para más contexto.
 
-## Características
-- Captura guiada con círculos de alineación.
-- Control de calidad básico: guía de iluminación/estabilidad; detección de ojos en web.
-- Explicaciones en lenguaje claro, hipótesis no diagnósticas y recomendaciones.
-- Historial local con comparaciones.
+## Arquitectura del Monorepo
+- `VisionCheckAI/` frontend (Expo React Native)
+- `backend/` API (Node + Express)
+- `ml/` módulo de ML (Python + TensorFlow/Keras)
+- `infra/` Dockerfiles, compose y scripts
+- `docs/` documentación central y temática
 
-## Requisitos
-- Node 20+, npm.
-- Expo SDK 54.
+```mermaid
+flowchart LR
+  A[Frontend (Expo)] -- POST /upload --> B[Backend (Express)]
+  B -- spawn python --> C[ML predict.py]
+  C -- JSON preds --> B
+  B -- explanation + item --> A
+```
 
-## Instalación
+## Backend: cómo correr
 ```bash
-cd VisionCheckAI
+cd backend
 npm install
+npm start
+# Salud: GET http://localhost:4000/health
 ```
 
-## Ejecución
-- Web: `npm run web` → http://localhost:8081/
-- iOS: `npm run ios`
-- Android: `npm run android`
-
-## Build Web
+## Frontend: cómo correr
 ```bash
-npm run build:web
-# artefacto en VisionCheckAI/dist
+cd visioncheck-frontend
+npm install
+npm run web
+# iOS: npm run ios  |  Android: npm run android
 ```
 
-## Despliegue CI
-- GitHub Actions construye y despliega a Vercel.
-- Configura secreto `VERCEL_TOKEN` en GitHub (Settings → Secrets → Actions).
-- Opcional: `VERCEL_SCOPE` para publicar bajo tu cuenta/organización (por defecto `PaulJonaDev`).
-- El proyecto se publica con nombre `visioncheck-ai`.
+## ML: cómo correr
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r ml/requirements.txt
+python ml/inference/predict.py <ruta_imagen> <ruta_modelo>
+# ejemplo: python ml/inference/predict.py sample.jpg ml/models/mobilenet_v1/model.h5
+```
 
-## Releases
-- Los tags `v*` disparan el workflow de Release que:
-  - Construye el web (`VisionCheckAI/dist`) y sube `web-dist.zip` como asset.
-  - Crea el Release automáticamente usando el `GITHUB_TOKEN` del workflow.
-- Para publicar una versión:
-  - Actualiza `CHANGELOG.md`.
-  - Crea el tag: `git tag -a vX.Y.Z -m "Notas" && git push --tags`.
+## Variables de Entorno
+- Backend (`backend/src/config/env.js`):
+  - `PORT` (default `4000`)
+  - `ML_SCRIPT_PATH` (default `ml/inference/predict.py` relativo al repo)
+  - `ML_MODEL_PATH` (default `ml/models/mobilenet_v1/model.h5`)
+  - `ML_TIMEOUT_MS` (default `5000`)
+- Frontend (`visioncheck-frontend/src/config/env.ts`):
+  - `EXPO_PUBLIC_BACKEND_URL` (default `http://localhost:4000`)
+  - `EXPO_PUBLIC_FEATURE_EYE_GUIDE` (default `true`)
 
-## Estructura
-- `frontend/` UI (por ahora ubicada en `VisionCheckAI`).
-- `backend/` API Express (servidor básico `/health`, `/captures`).
-- `ml/` pipeline de datos y entrenamiento.
-- `data/` datasets (no versionados, ignorados por git).
-- `tests/` pruebas globales y de integración.
-- `VisionCheckAI/src/screens` pantallas.
-- `VisionCheckAI/src/ui` tema y componentes.
-- `VisionCheckAI/src/services` explicación, calidad e identificación de ojos.
-- `VisionCheckAI/src/state` Redux.
-
-## Configuración
-- `.env` no versionado. Ejemplo en `.env.example`.
-- Variables públicas Expo: `EXPO_PUBLIC_*`.
-  - `EXPO_PUBLIC_FEATURE_EYE_GUIDE=true` activa la guía de alineación en build.
-
-## Seguridad y Ética
-- Resultados no diagnósticos.
-- Imágenes locales por defecto.
+## Desarrollo con contenedores
+```bash
+bash infra/scripts/dev.sh
+# Backend en 3001, Frontend web en 8080 (exportado por Nginx)
+```
 
 ## Pruebas
+- Backend integración:
 ```bash
+cd backend
+npm test
+```
+-- Frontend (si aplica):
+```bash
+cd visioncheck-frontend
 npm test
 ```
 
-## Despliegue móvil (EAS)
-- iOS/Android con `eas build` (requiere cuentas).
+## Despliegue CI
+- Requiere secretos en GitHub Actions:
+  - `VERCEL_TOKEN` obligatorio
+  - `VERCEL_SCOPE` opcional (default `PaulJonaDev`)
+- El build web se publica como `visioncheck-ai` en Vercel.
 
-## Backend
-- Arranque: `cd backend && npm install && npm start`
-- Salud: `GET http://localhost:4000/health`
-
-## Contenedores
-- `docker-compose up -d` para levantar el backend en Node 20.
-- El frontend Expo se recomienda ejecutarlo en host durante desarrollo.
-
-## Datasets
-- Ver `/.trae/documents/datasets_vision_ocular.md`.
-
-## Qué falta / próximos pasos
-- Modelo on-device (TFLite) y calidad de imagen completa (blur/iluminación/distancia).
-- Backend para sincronización opcional y panel profesional.
-- Pipeline ML con datos reales y validación.
-
-## Cómo contribuir
-- Haz fork y PR hacia `main` con cambios pequeños y enfocados.
-- Usa commits tipo: `feat:`, `fix:`, `chore:`, `docs:`, `test:`.
-- Añade pruebas cuando afectes lógica.
-- No subas datos ni secretos; usa `.env` y sigue `.env.example`.
-
-## Licencia
-- Uso con fines de tamizaje no clínico.
+## Contribuir
+- PRs pequeños y enfocados hacia `main`.
+- Commits: `feat:`, `fix:`, `chore:`, `docs:`, `test:`.
+- No subir datos ni secretos; usar `.env` y seguir `.env.example`.

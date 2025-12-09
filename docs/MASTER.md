@@ -8,7 +8,7 @@ Tamizaje visual inteligente en móviles. Detecta patrones visibles y genera expl
 - Señales: enrojecimiento, opacidad, reflejo irregular, posible inflamación y fatiga.
 
 ## Arquitectura (Monorepo)
-- `frontend/` UI Expo RN (ubicada en `VisionCheckAI`).
+- `frontend/` UI Expo RN (ubicada en `visioncheck-frontend`).
 - `backend/` API Express (rutas limpias, servicios, core, config).
 - `ml/` pipeline profesional (datos, preprocesamiento, entrenamiento, inferencia, utils).
 - `infra/` Dockerfiles, compose y scripts.
@@ -17,7 +17,7 @@ Tamizaje visual inteligente en móviles. Detecta patrones visibles y genera expl
 - `data/` datasets locales (ignorados por git).
 
 ## Frontend
-- Directorio: `VisionCheckAI`
+- Directorio: `visioncheck-frontend`
 - Comandos: `npm run web`, `npm run ios`, `npm run android`, `npm run build:web`
 - Características:
   - Captura guiada y recorte automático de región de ojos.
@@ -85,7 +85,7 @@ Tamizaje visual inteligente en móviles. Detecta patrones visibles y genera expl
 - Módulo ML: recibe imagen → `preprocess` → `modelo` → retorna predicciones.
 
 ## Pruebas
-- Frontend: Jest + Testing Library (`VisionCheckAI/__tests__`)
+- Frontend: Jest + Testing Library (`visioncheck-frontend/__tests__`)
 - Backend: Jest + Supertest (`backend/__tests__`)
 - Cobertura: subida como artifact en CI.
 
