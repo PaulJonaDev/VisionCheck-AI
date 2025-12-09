@@ -1,3 +1,4 @@
 import app from './app.js'
 import { env } from './config/env.js'
-app.listen(env.port, () => {})
+const PORT = process.env.PORT || env.port
+app.listen(PORT, () => console.log(`Backend running on port ${PORT}`))
