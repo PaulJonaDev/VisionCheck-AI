@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-export const cfg = {
+export const env = {
   port: process.env.PORT || 4000
 }

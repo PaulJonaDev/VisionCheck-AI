@@ -1,0 +1,1 @@
+export function analyze(payload) { const base = { redness: 0.3, opacity: 0.2, reflection: 0.4, inflammation: 0.1, fatigue: 0.5 }; return { ...base, input: payload } }

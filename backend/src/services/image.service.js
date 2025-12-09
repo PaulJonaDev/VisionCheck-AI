@@ -1,0 +1,1 @@
+export function validateImage(input) { return { ok: !!input, uri: input } }
