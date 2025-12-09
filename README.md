@@ -38,6 +38,14 @@ npm run build:web
 - Opcional: `VERCEL_SCOPE` para publicar bajo tu cuenta/organización (por defecto `PaulJonaDev`).
 - El proyecto se publica con nombre `visioncheck-ai`.
 
+## Releases
+- Los tags `v*` disparan el workflow de Release que:
+  - Construye el web (`VisionCheckAI/dist`) y sube `web-dist.zip` como asset.
+  - Crea el Release automáticamente usando el `GITHUB_TOKEN` del workflow.
+- Para publicar una versión:
+  - Actualiza `CHANGELOG.md`.
+  - Crea el tag: `git tag -a vX.Y.Z -m "Notas" && git push --tags`.
+
 ## Estructura
 - `frontend/` aplicación (ubicada en `VisionCheckAI`).
 - `backend/` API (placeholder).
