@@ -71,6 +71,12 @@ Tamizaje visual inteligente en móviles. Detecta patrones visibles y genera expl
   - `VERCEL_SCOPE` opcional (por defecto `PaulJonaDev`)
 - Releases: crear tag `vX.Y.Z` → genera Release con `web-dist.zip`.
 
+## Flujo Front → Back → ML
+- Frontend: `CaptureScreen` toma foto y hace `POST /upload`.
+- Backend `/upload`: valida imagen, guarda temporalmente, invoca ML `predict.py` y compone explicación.
+- Backend `/analysis`: lista o recibe resultados para historial.
+- Módulo ML: recibe imagen → `preprocess` → `modelo` → retorna predicciones.
+
 ## Pruebas
 - Frontend: Jest + Testing Library (`VisionCheckAI/__tests__`)
 - Backend: Jest + Supertest (`backend/__tests__`)
