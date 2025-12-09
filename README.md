@@ -1,5 +1,7 @@
 # VisionCheck AI
 
+Consulta el documento maestro en `docs/MASTER.md` para una visión completa del producto, arquitectura, comandos y CI/CD.
+
 Tamizaje visual inteligente en dispositivos móviles. Detecta patrones y cambios oculares comunes sin realizar diagnósticos médicos.
 
 ## Alcance
