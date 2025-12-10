@@ -17,33 +17,33 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: VisionCheckAI/package-lock.json
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
-        working-directory: VisionCheckAI
+        working-directory: frontend
         run: |
           npm ci || npm install --no-audit --no-fund --legacy-peer-deps
 
       - name: Type check
-        working-directory: VisionCheckAI
+        working-directory: frontend
         run: npm run typecheck
 
       - name: Build web
-        working-directory: VisionCheckAI
+        working-directory: frontend
         run: npm run build:web
         env:
           EXPO_PUBLIC_FEATURE_EYE_GUIDE: 'true'
 
       - name: Zip web dist
         run: |
-          cd VisionCheckAI
+          cd frontend
           zip -r web-dist.zip dist
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            VisionCheckAI/web-dist.zip
+            frontend/web-dist.zip
           draft: false
           prerelease: false
         env:
