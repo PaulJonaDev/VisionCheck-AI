@@ -93,6 +93,10 @@ jobs:
       - name: Remove existing Vercel link (if any)
         run: rm -rf .vercel
 
+      - name: Copy Vercel project link from repo root
+        run: |
+          if [ -d "../.vercel" ]; then cp -r ../.vercel .vercel; fi
+
       - name: Deploy to Vercel (Production)
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
