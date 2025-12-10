@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../state/store';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
-import { explain } from '../services/explanation';
+import { explain } from '../services/api/analysis';
 import { addToHistory } from '../state/slices/analysisSlice';
 import { useNavigation } from '@react-navigation/native';
 import SectionHeader from '../ui/components/SectionHeader';

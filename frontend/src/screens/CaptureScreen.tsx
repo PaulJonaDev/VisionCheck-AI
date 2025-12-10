@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useDispatch } from 'react-redux';
 import { setLastCapture } from '../state/slices/analysisSlice';
-import { assessQualityForUri } from '../services/quality';
+import { assessQualityForUri } from '../services/api/quality';
 import { PatternPrediction } from '../types';
 import { RootStackParamList } from '../navigation';
 import PrimaryButton from '../ui/components/PrimaryButton';
@@ -13,9 +13,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { colors, spacing } from '../ui/theme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useWindowDimensions } from 'react-native';
-import { detectEyes } from '../services/eyeDetection';
-import { cropToEyesRegion } from '../services/cropping';
-import { uploadCapture } from '../services/api';
+import { detectEyes, cropToEyesRegion } from '../services/api/vision';
+import { uploadCapture } from '../services/api/analysis';
 
 export default function CaptureScreen() {
   const [permission, requestPermission] = useCameraPermissions();

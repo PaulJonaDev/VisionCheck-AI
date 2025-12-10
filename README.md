@@ -5,7 +5,7 @@ Tamizaje visual inteligente en dispositivos móviles. Detecta patrones y cambios
 Consulta el documento maestro `docs/MASTER.md` y el overview `docs/OVERVIEW.md` para más contexto.
 
 ## Arquitectura del Monorepo
-- `VisionCheckAI/` frontend (Expo React Native)
+- `frontend/` frontend (Expo React Native)
 - `backend/` API (Node + Express)
 - `ml/` módulo de ML (Python + TensorFlow/Keras)
 - `infra/` Dockerfiles, compose y scripts
@@ -29,7 +29,7 @@ npm start
 
 ## Frontend: cómo correr
 ```bash
-cd visioncheck-frontend
+cd frontend
 npm install
 npm run web
 # iOS: npm run ios  |  Android: npm run android
@@ -49,7 +49,7 @@ python ml/inference/predict.py <ruta_imagen> <ruta_modelo>
   - `ML_SCRIPT_PATH` (default `ml/inference/predict.py` relativo al repo)
   - `ML_MODEL_PATH` (default `ml/models/mobilenet_v1/model.h5`)
   - `ML_TIMEOUT_MS` (default `5000`)
-- Frontend (`visioncheck-frontend/src/config/env.ts`):
+- Frontend (`frontend/src/config/env.ts`):
   - `EXPO_PUBLIC_BACKEND_URL` (default `http://localhost:4000`)
   - `EXPO_PUBLIC_FEATURE_EYE_GUIDE` (default `true`)
 
@@ -67,7 +67,7 @@ npm test
 ```
 -- Frontend (si aplica):
 ```bash
-cd visioncheck-frontend
+cd frontend
 npm test
 ```
 

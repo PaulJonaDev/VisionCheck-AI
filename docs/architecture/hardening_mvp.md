@@ -13,10 +13,10 @@
 
 ## Refactor de Estructura
 - Confirmar y ordenar carpetas:
-  - `visioncheck-frontend/src/components` (UI reutilizable)
-  - `visioncheck-frontend/src/services` (quality, eyeDetection, explanation, futuro `ml/inference`)
-  - `visioncheck-frontend/src/config` (env y constantes)
-  - `visioncheck-frontend/src/app` (navegación y estado)
+  - `frontend/src/components` (UI reutilizable)
+  - `frontend/src/services` (quality, eyeDetection, explanation, futuro `ml/inference`)
+  - `frontend/src/config` (env y constantes)
+  - `frontend/src/app` (navegación y estado)
 - Separar futuro backend (`server/`) como placeholder.
 
 ## Pipeline de Datos/ML
