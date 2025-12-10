@@ -1,4 +1,4 @@
-import { explain } from '../src/services/explanation';
+import { explain } from '../src/services/api/analysis';
 import { expect, test } from '@jest/globals';
 
 test('genera hipótesis y recomendación', () => {

@@ -6,7 +6,7 @@ import { analyze } from '../../services/analysis.service.js'
 export async function postUpload(req, res) {
   const v = validateImage(req.body?.imageUri)
   let preds = FALLBACK_PREDS
-  try { preds = await predict(v.uri) } catch { preds = FALLBACK_PREDS }
+  try { preds = await predict(v.uri) } catch (e) { preds = FALLBACK_PREDS }
   const explanation = analyze(preds)
   const item = saveCapture({ id: String(Date.now()), imageUri: v.uri, analysis: { preds, explanation }, meta: req.body })
   created(res, item)

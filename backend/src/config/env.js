@@ -12,5 +12,8 @@ export const env = {
     script: process.env.ML_SCRIPT_PATH || path.join(repoRoot, 'ml/inference/predict.py'),
     model: process.env.ML_MODEL_PATH || path.join(repoRoot, 'ml/models/mobilenet_v1/model.h5'),
     timeoutMs: Number(process.env.ML_TIMEOUT_MS || 5000)
+  },
+  upload: {
+    maxImageBytes: Number(process.env.MAX_IMAGE_BYTES || 6 * 1024 * 1024)
   }
 }

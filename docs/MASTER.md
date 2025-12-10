@@ -39,6 +39,7 @@ Tamizaje visual inteligente en móviles. Detecta patrones visibles y genera expl
   - `POST /upload` → guarda captura en memoria
   - `POST /analysis` → devuelve análisis stub
   - `GET /analysis` → lista en memoria
+  - `POST /ml/predict` → invoca `ml/inference/predict.py` y retorna `preds`
 - Comandos: `npm install`, `npm start`, `npm test`
 
 ## ML Pipeline
@@ -58,6 +59,7 @@ Tamizaje visual inteligente en móviles. Detecta patrones visibles y genera expl
 - Salida: objeto con probabilidades por patrón y metadatos `{ image, model }`.
 - Errores: `ML_SCRIPT_NOT_FOUND`, `ML_PROCESS_ERROR`, `ML_TIMEOUT`, `ML_OUTPUT_PARSE_ERROR`.
 - Configuración (`env.js`): `ML_SCRIPT_PATH`, `ML_MODEL_PATH`, `ML_TIMEOUT_MS`.
+ - Endpoint: `POST /ml/predict` con `{ imageUri?: string, base64?: string, modelPath?: string }`.
 
 ## Infraestructura
 - Dockerfiles:
@@ -93,6 +95,7 @@ Tamizaje visual inteligente en móviles. Detecta patrones visibles y genera expl
 - `.env` no versionado (`.env.example` de guía).
 - No subir datos sensibles; `data/` y `ml/models/` ignorados.
 - Resultados no diagnósticos.
+ - Validaciones de imágenes: tamaño máximo configurable (`MAX_IMAGE_BYTES`), tipos permitidos (`image/jpeg`, `image/png`), sanitización de `base64` y esquemas de `imageUri`.
 
 ## Cómo contribuir
 - PRs pequeños y enfocados a `main`.
