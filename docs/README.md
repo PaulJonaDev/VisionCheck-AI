@@ -8,3 +8,4 @@ Secciones temáticas:
 - Arquitectura: `docs/architecture/technical_architecture.md`, `docs/architecture/hardening_mvp.md`
 - ML: `docs/ml/datasets_vision_ocular.md`, `ml/README_ml.md`
 - Despliegue: `docs/deployment/configure_vercel_expo_env.md`, `docs/deployment/publish_github.md`
+ - Infraestructura: `infra/README.md`
